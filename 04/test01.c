@@ -148,6 +148,7 @@ int main(){
     bool flag = true;
     for (int i = 0,j = len - 1;i < j; i++,j--){
         if (str[i] != str[j])
+            // 这里可以直接跳出循环
             flag = false;
     }
     if(flag)
@@ -156,12 +157,73 @@ int main(){
         printf("%s is not a plalindrome\n",str);
 } */
 
-// 选择排序 n个元素  需要进行排序n-1次，每次选出最大值或者最小值
 
+
+// 选择排序 n个元素  需要进行排序n-1次，每次选出最大值或者最小值
+// 待优化的地方，对于已有的排序，如何减少循环次数
+#define MAX 9
 int main(){
 
     // 从终端输入数字，存入到数组中
 
+    int len = -1;
+    int nums[MAX];
+
+    while(scanf("%d",&nums[++len]) != EOF);
+
+    //遍历数组
+    for(int i = 0; i < len; i++){
+        printf("%d ", nums[i]);
+    }
+    printf("\n");
+    printf("==========================\n");
+
+    // 进行选择排序
+    // 最后一轮是不用排序的，因此可以少循环一次
+    for (int i = 0; i < len; i++){
+        // 定义一个最小值，即当前下标的元素
+        int min = nums[i];
+        int min_index = i;
+        for(int j = i + 1; j < len; j++){
+            if (nums[j] < min){
+                // 直接进行交换
+                min_index = j;
+                // 重新赋予最小值
+                min = nums[j];
+            }
+        }
+        // 打印颜色
+        for (int k = 0; k < len; k++){
+            if (k == i){
+                printf("\033[40;31m%d\033[0m ",nums[k]);  // 白底红字
+            }
+            else if(k == min_index){
+                printf("\033[43;37m%d\033[0m ",nums[k]); // 黄  底白字
+            }
+            else{
+                printf("%d ",nums[k]);
+            }
+        }
+        printf("\n");
+
+        // 交换数字, min 和当前下标
+        // 增加调教判断，是否需要交换
+        if (min_index != i){
+            int tmp = nums[i];
+            nums[i] = nums[min_index];
+            nums[min_index] = tmp;
+        }
+
+        
+    }
+
+    printf("\n");
+
+    for(int i = 0; i < len; i++){
+        printf("%d ", nums[i]);
+    }
+
+    printf("\n");
 
 }
 
