@@ -161,6 +161,8 @@ int main(){
 
 // 选择排序 n个元素  需要进行排序n-1次，每次选出最大值或者最小值
 // 待优化的地方，对于已有的排序，如何减少循环次数
+
+/* 
 #define MAX 9
 int main(){
 
@@ -225,7 +227,108 @@ int main(){
 
     printf("\n");
 
+} */
+
+// 求素数 prime
+// 素数：只能被1 和自身整除的数
+
+/* int main(){
+
+    int max = 100;
+
+    for (int i = 1; i <= max; i++){
+        int is_prime = 1;
+        for (int j = 2; j < i; j++ ){
+            if (i % j == 0){
+                is_prime = 0;
+                break;
+            }
+        }
+        if (is_prime){
+            printf("%d ",i);
+        }
+    }
+
+    printf("\n");
+} */
+
+
+
+
+//二分查找法
+// 前提 数组是有序的
+
+/*
+#define LEN 10
+int nums[LEN] = {1,1,2,3,5,8,11,19,30,49};
+
+int main(){
+    // 数组初始化不能通过下面的方式
+    // 可以改用预编译宏
+    // const int LEN = 11;
+    // int nums[LEN] = {1,1,2,3,5,8,11,19,30,49};
+
+    // 获取指定数下标
+    int index = -1;
+    int num;
+    scanf("%d",&num);
+    int low = 0;
+    int high = LEN - 1;
+
+    while (low <= high)
+    {
+        int mid = (low + high) / 2;
+        if (num < nums[mid] ){
+            // 注意这里是减1
+            high = mid - 1;
+        }else if(num > nums[mid]){
+            low = mid + 1;
+        }else {
+            index = mid;
+            break;
+        }
+    }
+    if (index != -1){
+        printf("%d\n",index);
+    }else {
+        printf("%d not found\n",num);
+    } 
 }
+*/
+
+
+// 冒泡排序法
+// 相邻元素两两比较
+
+int main(){
+
+    int nums[10] = {8, 5, 33, 10, 22, 98, 76, 2, 67, 45};
+
+    //需要有两个循环
+    int len = 10;
+    // 打印数组
+    for(int i = 0; i < len; i++){
+        printf("%d ",nums[i]);
+    }
+    printf("\n");
+
+    for(int i = 0; i < len; i++){
+        // 每次循环，确认的都是len-1-i位置的数据
+        for(int j = 0; j < len-1-i; j++){
+            if (nums[j] > nums[j+1]){
+                int temp = nums[j];
+                nums[j] = nums[j+1];
+                nums[j+1] = temp;
+            }
+        }
+    }
+
+    for(int i = 0; i < len; i++){
+        printf("%d ",nums[i]);
+    }
+    printf("\n");
+}
+
 
 
 
